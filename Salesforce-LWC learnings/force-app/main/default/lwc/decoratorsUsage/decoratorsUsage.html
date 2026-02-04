@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title={componentTitle} icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <p><strong>Public Property (api):</strong> {componentTitle}</p>
+            <p><strong>Tracked Property (tracked):</strong> {billingLogs.length}</p>
+        </div>
+    </lightning-card>
+    <lightning-card title="My Profile Information" icon-name="standard:user">
+        <div class="slds-p-around_medium profile-card">
+            
+            <template if:false={user.data}>
+                <template if:false={user.error}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+            </template>
+
+            <template if:true={user.data}>
+                <div class="user-info">
+                    <p><strong>Full Name:</strong> <span class="highlight">{userName}</span></p>
+                    <p><strong>Email Address:</strong> {userEmail}</p>
+                    <p class="slds-m-top_x-small"><strong>User ID:</strong> {userId}</p>
+                </div>
+            </template>
+
+            <template if:true={user.error}>
+                <div class="slds-text-color_error">
+                    An error occurred while fetching user profile data.
+                </div>
+            </template>
+            
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,19 @@
+.profile-card {
+    background-color: #f9fbfe;
+    border-radius: 8px;
+}
+
+.user-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight {
+    color: #0176d3;
+    font-weight: bold;
+}
+
+/* Scoped styling: This will not affect other components on the page! */
+strong {
+    color: #3e3e3c;
+}

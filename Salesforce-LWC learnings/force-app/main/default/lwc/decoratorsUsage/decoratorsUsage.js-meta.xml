@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs> <!--The @api decorator only makes the variable "public" in code. To make it show up in the Lightning App Builder sidebar, you must define it in the XML.-->
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+            <property name="componentTitle" type="String" label="Custom Component Title" description="Enter a title for the billing monitor"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
