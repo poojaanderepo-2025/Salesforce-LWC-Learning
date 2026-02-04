@@ -22,5 +22,6 @@ export default class LifeCycleHookLogger extends LightningElement {
     handleRender() {
         // Changing a tracked property forces a re-render
         this.dummyProperty++;
+        console.log('Current Value:', this.dummyProperty);
     }
 }
