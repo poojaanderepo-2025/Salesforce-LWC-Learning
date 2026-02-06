@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Billing Dashboard (Parent to Child Communication)" icon-name="standard:account">
+        <div class="slds-p-horizontal_medium">
+            <p class="slds-text-body_regular">Welcome to the Billing Dashboard! Here you can find all your billing information and manage your subscriptions.</p>
+            <lightning-button variant="brand" label="Add New Invoice" class="slds-m-top_medium" onclick={handleRefresh}></lightning-button>
+        </div>
+        <div class="slds-p-around_medium">
+            <div class="slds-m-bottom_medium slds-text-color_weak">
+                Total Invoices in Parent: {myInvoices.length}
+            </div>
+
+            <c-invoice-list invoices={myInvoices}></c-invoice-list>
+            
+            <template if:false={myInvoices.length}>
+                <p class="slds-text-align_center slds-p-vertical_large">
+                    No invoices found. Click "Add New Invoice" to start.
+                </p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
