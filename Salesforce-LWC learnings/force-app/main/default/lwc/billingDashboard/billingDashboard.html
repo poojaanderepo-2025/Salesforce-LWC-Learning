@@ -9,7 +9,7 @@
                 Total Invoices in Parent: {myInvoices.length}
             </div>
 
-            <c-invoice-list invoices={myInvoices}></c-invoice-list>
+           <c-invoice-list invoices={myInvoices} ondeleteinvoice={handleDeleteInvoice}></c-invoice-list>
             
             <template if:false={myInvoices.length}>
                 <p class="slds-text-align_center slds-p-vertical_large">
