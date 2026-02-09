@@ -1,4 +1,6 @@
-import { LightningElement,track } from 'lwc';
+import { LightningElement,track,wire } from 'lwc';
+import { subscribe, MessageContext, APPLICATION_SCOPE } from 'lightning/messageService';
+import INVOICE_CHANNEL from '@salesforce/messageChannel/InvoiceMessageChannel__c';
 
 export default class BillingDashboard extends LightningElement 
 {
@@ -7,6 +9,43 @@ export default class BillingDashboard extends LightningElement
         { id: 'INV-102', amount: 450, status: 'Paid' },
         { id: 'INV-103', amount: 80, status: 'Paid' }
     ];
+    @track filteredInvoices = []; // This is what the HTML template iterates over
+    subscription = null;
+
+    @wire(MessageContext)
+    messageContext;
+
+    // 4. Subscribe when the component loads
+    connectedCallback() {
+        this.subscribeToMessageChannel();
+    }
+
+    disconnectedCallback() {
+        // Senior Move: Clean up the subscription to prevent memory leaks
+        unsubscribe(this.subscription);
+        this.subscription = null;
+    }
+
+    subscribeToMessageChannel() {
+        if (!this.subscription) {
+            this.subscription = subscribe(
+                this.messageContext,
+                INVOICE_CHANNEL,
+                (message) => this.handleMessage(message),
+                { scope: APPLICATION_SCOPE }
+            );
+        }
+    }
+
+    // Logic: Listen for the Search Term from the Global Search Component
+    handleMessage(message) {
+        const term = message.searchTerm ? message.searchTerm.toLowerCase() : '';
+        
+        // Always filter against the MASTER list (myInvoices)
+        this.filteredInvoices = this.myInvoices.filter(inv => 
+            inv.id.toLowerCase().includes(term)
+        );
+    }
 
     handleRefresh() {
         // Simulate a data change - LWC will automatically push this to the child
