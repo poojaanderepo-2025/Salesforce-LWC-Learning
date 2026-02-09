@@ -1,3 +1,16 @@
 <template>
-    
+    <lightning-card title="Global Invoice Search" icon-name="standard:search">
+        <div class="slds-p-around_medium custom-search-container">
+            <lightning-input
+                name="enter-search"
+                label="Search Invoices"
+                type="search"
+                placeholder="Type Invoice ID (e.g. INV-101)..."
+                onchange={handleInputChange}
+            ></lightning-input>
+            <p class="slds-m-top_x-small slds-text-body_small slds-text-color_weak">
+                Search is broadcasted across the app.
+            </p>
+        </div>
+    </lightning-card>
 </template>

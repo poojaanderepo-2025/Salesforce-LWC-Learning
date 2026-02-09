@@ -37,6 +37,11 @@ export default class BillingDashboard extends LightningElement
         }
     }
 
+    unsubscribeToMessageChannel() {
+        unsubscribe(this.subscription);
+        this.subscription = null;
+    }
+
     // Logic: Listen for the Search Term from the Global Search Component
     handleMessage(message) {
         const term = message.searchTerm ? message.searchTerm.toLowerCase() : '';
@@ -45,6 +50,16 @@ export default class BillingDashboard extends LightningElement
         this.filteredInvoices = this.myInvoices.filter(inv => 
             inv.id.toLowerCase().includes(term)
         );
+    }
+
+    applyFiltering() {
+        if (this.searchTerm) {
+            this.filteredInvoices = this.allInvoices.filter(inv => 
+                inv.id.toLowerCase().includes(this.searchTerm)
+            );
+        } else {
+            this.filteredInvoices = [...this.allInvoices];
+        }
     }
 
     handleRefresh() {

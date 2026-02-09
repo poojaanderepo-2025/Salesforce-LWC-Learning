@@ -1,0 +1,9 @@
+.custom-search-container {
+    background-color: #f3f3f3;
+    border-radius: 4px;
+}
+
+/* Ensure the search icon matches brand colors */
+:host {
+    --sds-c-icon-color-foreground-default: #0176d3;
+}

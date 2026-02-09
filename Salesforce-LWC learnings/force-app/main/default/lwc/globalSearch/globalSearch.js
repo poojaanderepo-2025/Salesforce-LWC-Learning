@@ -1,21 +1,37 @@
-import { LightningElement,wire } from 'lwc';
-// 1. Import LMS Utilities and the Channel
+import { LightningElement, wire } from 'lwc';
 import { publish, MessageContext } from 'lightning/messageService';
 import INVOICE_CHANNEL from '@salesforce/messageChannel/InvoiceMessageChannel__c';
 
-export default class GlobalSearch extends LightningElement 
-{
+export default class GlobalSearch extends LightningElement {
+    
+    // Wire the MessageContext to the component's lifecycle
     @wire(MessageContext)
     messageContext;
 
-    handleSearchChange(event) {
-        const searchValue = event.target.value;
-        
-        // 2. Prepare the payload
-        const payload = { searchTerm: searchValue };
+    // Timer variable for debouncing
+    delayTimeout;
 
-        // 3. Send it to the world!
-        publish(this.messageContext, INVOICE_CHANNEL, payload);
+    handleInputChange(event) {
+        const searchValue = event.target.value;
+
+        // Debouncing logic: Wait 300ms after the user stops typing
+        window.clearTimeout(this.delayTimeout);
+        
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        this.delayTimeout = setTimeout(() => {
+            this.publishSearchMessage(searchValue);
+        }, 300);
     }
 
+    publishSearchMessage(term) {
+        const payload = {
+            searchTerm: term,
+            source: 'GlobalSearchComponent'
+        };
+
+        // Send the message to anyone listening on this channel
+        publish(this.messageContext, INVOICE_CHANNEL, payload);
+        
+        console.log('Published Search Term:', term);
+    }
 }

@@ -18,4 +18,28 @@
             </template>
         </div>
     </lightning-card>
+    <lightning-card title="Invoice Dashboard" icon-name="standard:account">
+        <div slot="actions">
+            <lightning-button label="Add Invoice" onclick={handleRefresh}></lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <template if:true={searchTerm}>
+                <div class="slds-m-bottom_small slds-text-color_weak">
+                    Filtering by: <strong>"{searchTerm}"</strong>
+                </div>
+            </template>
+
+            <c-invoice-list 
+                invoices={filteredInvoices}
+                ondeleteinvoice={handleDeleteInvoice}>
+            </c-invoice-list>
+
+            <template if:false={filteredInvoices.length}>
+                <div class="slds-align_absolute-center slds-m-top_large">
+                    <p>No invoices match your search.</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
 </template>
