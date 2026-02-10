@@ -1,0 +1,8 @@
+:host {
+    display: block;
+}
+
+/* Ensure the datatable container doesn't overflow */
+.slds-p-around_medium {
+    position: relative;
+}
