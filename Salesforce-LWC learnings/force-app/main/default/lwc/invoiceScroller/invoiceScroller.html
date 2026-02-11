@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="All Invoices (Lazy Loaded)" icon-name="standard:account">
+        <div class="table-container">
+            <lightning-datatable
+                key-field="Id"
+                data={invoices}
+                columns={columns}
+                enable-infinite-loading
+                onloadmore={handleLoadMore}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+
+        <div slot="footer" class="slds-align_absolute-center">
+            <template if:true={isLoading}>
+                <lightning-spinner alt="Loading more data..." size="small"></lightning-spinner>
+            </template>
+            <template if:false={isLoading}>
+                <span class="slds-text-color_weak">{loadMoreStatus}</span>
+            </template>
+        </div>
+    </lightning-card>
+</template>

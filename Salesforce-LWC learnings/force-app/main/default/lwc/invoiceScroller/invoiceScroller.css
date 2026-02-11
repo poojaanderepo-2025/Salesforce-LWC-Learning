@@ -1,0 +1,10 @@
+.table-container {
+    height: 450px; /* Adjust based on your UI needs */
+    position: relative;
+}
+
+/* Optional: Make the footer text look professional */
+span.slds-text-color_weak {
+    font-size: 0.8rem;
+    font-style: italic;
+}
