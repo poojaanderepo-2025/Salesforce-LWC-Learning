@@ -1,0 +1,11 @@
+<template>
+    <c-my-custom-datatable
+        key-field="Id"
+        data={employeeData}
+        columns={columns}
+        show-row-number-column
+        onrowaction={handleRowAction}
+        onsave={handleSave}
+        draft-values={draftValues}>
+    </c-my-custom-datatable>
+</template>
