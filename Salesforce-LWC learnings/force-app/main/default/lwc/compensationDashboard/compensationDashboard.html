@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Enterprise Compensation Review" icon-name="standard:rtc_presence">
+        <div class="slds-m-around_medium">
+            <c-my-custom-datatable
+                key-field="Id"
+                data={employeeData}
+                columns={columns}
+                user-dept={userDept}
+                rating-options={ratingOptions}
+                wired-result={wiredEmployeeResult}
+                draft-values={draftValues}
+                show-row-number-column
+                onsave={handleSave}>
+            </c-my-custom-datatable>
+        </div>
+    </lightning-card>
+</template>
